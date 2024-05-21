@@ -34,6 +34,18 @@
 	  import bridge from "https://esm.run/@vkontakte/vk-bridge"
 
 	  bridge.send("VKWebAppInit");
+
+	  bridge.send('VKWebAppAllowNotifications').then((data) => {
+		  if (data.result) {
+			  // Разрешение на отправку уведомлений мини-приложением или игрой получено
+		  } else {
+			  // Ошибка
+		  }
+	  })
+	  .catch((error) => {
+		  // Ошибка
+		  console.log(error);
+	  });
 	</script>
   </body>
 </html>
