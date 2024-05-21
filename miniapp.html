@@ -7,18 +7,24 @@
 	  body {
 		  height: 100dvh;
 		  display: grid;
-		  grid-template-rows: 10dvh 1fr 20dvh;
+		  grid-template-rows: 10dvh 70dvh 20dvh;
 		  margin: 0;
 		  text-align: center;
+		  font-family: sans-serif;
+		  font-size: 20px;
 	  }
 
 	  body > * {
 		  align-content: center;
 	  }
 
-	  header { background-color: #008822; }
+	  header { background-color: #008822; color: #fff; }
 	  main { background-color: #f1f1f1; }
-	  footer { background-color: #881122; }
+	  button {
+		  background-color: #881122;
+		  color: #fff;
+		  border: none;
+	  }
 
 	  #bg {
 		  background-color: #3d3d3d;
@@ -29,35 +35,38 @@
 		  height: 100dvh;
 		  z-index: -1;
 	  }
+
+	  main, img {
+		  max-height: 100%;
+		  max-width: 100%;
+	  }
 	</style>
   </head>
   <body>
 	<div id="bg"></div>
 	<header>
-	  HEADER
+	  <h1>KittenMatch</h1>
 	</header>
 	<main>
-	  CONTENT
+	  <img src="https://cataas.com/cat" />
 	</main>
-	<footer>
-	  FOOTER
-	</footer>
+	<button>
+	  Like!
+	</button>
 	<script type="module">
 	  import bridge from "https://esm.run/@vkontakte/vk-bridge"
 
 	  bridge.send("VKWebAppInit");
 
-	  bridge.send('VKWebAppAllowNotifications').then((data) => {
-		  if (data.result) {
-			  // Разрешение на отправку уведомлений мини-приложением или игрой получено
-		  } else {
-			  // Ошибка
-		  }
+	  // bridge.send('VKWebAppAllowNotifications').catch()
+	  const likeBtn = document.querySelector('button')
+	  const catAvatar = document.querySelector('img')
+
+	  likeBtn.addEventListener('click', (e) => {
+		  likeBtn.disabled = true
+		  catAvatar.setAttribute('src', `https://cataas.com/cat?time=${Date.now()}`)
+		  catAvatar.addEventListener('load', () => { likeBtn.disabled = false })
 	  })
-	  .catch((error) => {
-		  // Ошибка
-		  console.log(error);
-	  });
 	</script>
   </body>
 </html>
