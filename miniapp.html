@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+	<meta charset="utf-8" />
+	<title>Mini App Demo</title>
+	<style>
+	  body {
+		  height: 100dvh;
+		  display: grid;
+		  grid-template-rows: 10dvh 1fr 20dvh;
+		  margin: 0;
+		  text-align: center;
+	  }
+
+	  body > * {
+		  align-content: center;
+	  }
+
+	  header { background-color: #008822; }
+	  footer { background-color: #881122; }
+	</style>
+  </head>
+  <body>
+	<header>
+	  HEADER
+	</header>
+	<main>
+	  CONTENT
+	</main>
+	<footer>
+	  FOOTER
+	</footer>
+	<script type="module">
+	  import bridge from "https://esm.run/@vkontakte/vk-bridge"
+
+	  bridge.send("VKWebAppInit");
+	</script>
+  </body>
+</html>
