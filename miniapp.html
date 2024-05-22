@@ -24,8 +24,8 @@
 		  background-color: #881122;
 		  color: #fff;
 		  border: none;
+		  font-size: 3rem;
 	  }
-		  align-content: center;
 
 	  h1 {
 		  padding: 0;
@@ -37,6 +37,7 @@
 		  position: fixed;
 		  top: 0;
 		  left: 0;
+		  align-content: center;
 		  right: 0;
 		  height: 100dvh;
 		  z-index: -1;
@@ -57,25 +58,24 @@
   <body>
 	<div id="bg"></div>
 	<header>
-	  <h1>KittenMatch</h1>
+	  <h1>Лайкни котика :з</h1>
 	</header>
 	<main>
-	  <output id="ua"></output>
 	  <img src="https://cataas.com/cat" />
 	</main>
 	<button>
-	  Like!
+	  ❤️
 	</button>
 	<script type="module">
-	  import bridge from "https://esm.run/@vkontakte/vk-bridge"
+	  import bridge from 'https://esm.run/@vkontakte/vk-bridge'
 
-	  bridge.send("VKWebAppInit");
+	  bridge.send('VKWebAppInit')
 
-	  // bridge.send('VKWebAppAllowNotifications').catch()
-	  const likeBtn = document.querySelector('button')
 	  const catAvatar = document.querySelector('img')
-
-	  document.getElementById('ua').innerText = window.navigator.userAgent.toString()
+	  catAvatar.addEventListener('click', () => {
+		  bridge.send('VKWebAppRecommend').catch()
+	  })
+	  const likeBtn = document.querySelector('button')
 
 	  likeBtn.addEventListener('click', (e) => {
 		  likeBtn.disabled = true
