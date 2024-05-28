@@ -111,9 +111,9 @@
 	  </button>
 	</div>
 	<script>
-	  const NDIGITS = 7
-
 	  const renderTechInfo = () => {
+		  const NDIGITS = 7
+
 		  const cssData = ['vh', 'dvh', 'svh', 'lvh']
 				.map(unit => {
 					const supports = window.CSS.supports('height', `100${unit}`)
@@ -121,7 +121,10 @@
 
 					return `${unit}: ≈${px.toFixed(NDIGITS)}px,${supports ? '' : ' not'} supported`
 				})
-				.concat([`innerHeight/100: ${(window.innerHeight / 100).toFixed(NDIGITS)}px`])
+				.concat([
+					`innerHeight/100: ${(window.innerHeight / 100).toFixed(NDIGITS)}px`,
+					`clientHeight/100: ${(document.documentElement.clientHeight / 100).toFixed(NDIGITS)}px`,
+				])
 				.join('<br />')
 
 		  const ua = window.navigator.userAgent
