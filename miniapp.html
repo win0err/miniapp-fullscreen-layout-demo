@@ -71,7 +71,7 @@
 	  }
 	  #svh {
 		  height: 1svh;
-		  width: 1px;
+		  width: style="" 1px;
 	  }
 	  #dvh {
 		  height: 1dvh;
@@ -123,16 +123,17 @@
 
 					return `${unit}: ≈${px.toFixed(2)}px,${supports ? '' : ' not'} supported`
 				})
+				.concat([`innerHeight/100: ${(window.innerHeight * 0.01).toFixed(2)}px`])
 				.join('<br />')
 
 		  const ua = window.navigator.userAgent
 
 		  document
 	  			.querySelector('aside')
-				.innerHTML = `<p>${ua}</p><p>${cssData}</p>`
+			  .innerHTML = `<p>${new Date()}</p><p>${ua}</p><p>${cssData}</p>`
 	  }
 	  renderTechInfo()
-	  setTimeout(renderTechInfo, 250)
+	  setInterval(renderTechInfo, 500)
 	</script>
   </body>
 </html>
