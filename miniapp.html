@@ -91,7 +91,15 @@
 		  catAvatar.addEventListener('load', () => { likeBtn.disabled = false })
 	  })
 
-	  document.querySelector('aside').innerText = window.navigator.userAgent.toString()
+	  const cssSupports = JSON.stringify({
+	  	vh: window.CSS.supports('height', '100vh'),
+	  	dvh: window.CSS.supports('height', '100dvh'),
+	  	svh: window.CSS.supports('height', '100svh'),
+	  	lvh: window.CSS.supports('height', '100lvh'),
+	  })
+	  const ua = window.navigator.userAgent
+
+	  document.querySelector('aside').innerHTML = `${ua}<br />${cssSupports}`
 	</script>
   </body>
 </html>
