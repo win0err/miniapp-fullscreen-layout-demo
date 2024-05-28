@@ -99,7 +99,12 @@
 	  })
 	  const ua = window.navigator.userAgent
 
-	  document.querySelector('aside').innerHTML = `${ua}<br />${cssSupports}`
+	  const render = () => document
+	  	.querySelector('aside')
+	  .innerHTML = `${ua}<br />${cssSupports}<br />VH: ${window.innerHeight / 100}px`
+
+	  render()
+	  window.addEventListener('resize', render)
 	</script>
   </body>
 </html>
