@@ -60,12 +60,35 @@
 		  max-height: 100%;
 		  max-width: 100%;
 	  }
+	  #vh {
+		  height: 1vh;
+		  width: 1px;
+	  }
+	  #lvh {
+		  height: 1lvh;
+		  width: 1px;
+	  }
+	  #svh {
+		  height: 1svh;
+		  width: 1px;
+	  }
+	  #dvh {
+		  height: 1dvh;
+		  width: 1px;
+	  }
+	  #dvh, #lvh, #svh, #vh {
+		  top: 0;
+		  visibility: hidden;
+		  position: absolute;
+		  pointer-events: none;
+	  }
 	</style>
   </head>
   <body>
 	<div id="bg"></div>
 	<header>
 	  <h1>Лайкни котика :з</h1>
+	  <div id="vh"></div><div id="dvh"></div><div id="svh"></div><div id="lvh"></div>
 	</header>
 	<aside></aside>
 	<main>
@@ -91,20 +114,27 @@
 		  catAvatar.addEventListener('load', () => { likeBtn.disabled = false })
 	  })
 
-	  const cssSupports = JSON.stringify({
-	  	vh: window.CSS.supports('height', '100vh'),
-	  	dvh: window.CSS.supports('height', '100dvh'),
-	  	svh: window.CSS.supports('height', '100svh'),
-	  	lvh: window.CSS.supports('height', '100lvh'),
-	  })
-	  const ua = window.navigator.userAgent
+	  const renderTechInfo = () => {
+		  const cssSupports = JSON.stringify({
+	  		  vh: window.CSS.supports('height', '100vh'),
+	  		  dvh: window.CSS.supports('height', '100dvh'),
+	  		  svh: window.CSS.supports('height', '100svh'),
+	  		  lvh: window.CSS.supports('height', '100lvh'),
+		  })
+		  const heights = JSON.stringify({
+	  		  vh: document.getElementById('vh').getBoundingClientRect().height,
+	  		  dvh: document.getElementById('dvh').getBoundingClientRect().height,
+	  		  svh: document.getElementById('svh').getBoundingClientRect().height,
+	  		  lvh: document.getElementById('lvh').getBoundingClientRect().height,
+		  })
+		  const ua = window.navigator.userAgent
 
-	  const render = () => document
-	  	.querySelector('aside')
-	  .innerHTML = `${ua}<br />${cssSupports}<br />VH: ${window.innerHeight / 100}px`
-
-	  render()
-	  window.addEventListener('resize', render)
+		  document
+	  			.querySelector('aside')
+				.innerHTML = `${ua}<br />${cssSupports}<br />${heights}`
+	  }
+	  renderTechInfo()
+	  setTimeout(renderTechInfo, 250)
 	</script>
   </body>
 </html>
