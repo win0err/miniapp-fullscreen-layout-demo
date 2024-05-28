@@ -6,13 +6,16 @@
 	<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 	<style>
 	  body {
+		  margin: 0;
+		  font-size: 20px;
+		  font-family: sans-serif;
+	  }
+
+	  #app {
 		  height: 100dvh;
 		  display: grid;
-		  grid-template-rows: 5dvh 25dvh 60dvh 10dvh;
-		  margin: 0;
+		  grid-template-rows: 5dvh 85dvh 10dvh;
 		  text-align: center;
-		  font-family: sans-serif;
-		  font-size: 20px;
 	  }
 
 	  body > * {
@@ -22,8 +25,14 @@
 	  aside {
 		  font-family: monospace;
 		  font-size: .875rem;
-		  background-color: #eee;
 		  text-align: left;
+		  display: fixed;
+		  top: 7dvh;
+		  position: fixed;
+		  top: 5dvh;
+		  padding: .5rem;
+		  background: #0001;
+		  width: 100%;
 	  }
 
 	  header { background-color: #008822; color: #fff; }
@@ -88,17 +97,19 @@
   </head>
   <body>
 	<div id="bg"></div>
-	<header>
-	  <h1>Лайкни котика :з</h1>
-	  <div id="vh"></div><div id="dvh"></div><div id="svh"></div><div id="lvh"></div>
-	</header>
 	<aside></aside>
-	<main>
-	  <img src="https://cataas.com/cat" />
-	</main>
-	<button>
-	  ❤️
-	</button>
+	<div id="app">
+	  <header>
+		<h1>Лайкни котика :з</h1>
+		<div id="vh"></div><div id="dvh"></div><div id="svh"></div><div id="lvh"></div>
+	  </header>
+	  <main>
+		<img src="https://cataas.com/cat" />
+	  </main>
+	  <button>
+		❤️
+	  </button>
+	</div>
 	<script>
 	  const NDIGITS = 7
 
