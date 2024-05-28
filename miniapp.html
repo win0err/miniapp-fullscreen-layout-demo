@@ -3,6 +3,7 @@
   <head>
 	<meta charset="utf-8" />
 	<title>Mini App Demo</title>
+	<meta name="viewport" content="width=device-width, viewport-fit=cover" />
 	<style>
 	  body {
 		  height: 100dvh;
@@ -20,7 +21,7 @@
 
 	  aside {
 		  font-family: monospace;
-		  font-size: 0.75rem;
+		  font-size: .875rem;
 		  background-color: #eee;
 		  text-align: left;
 	  }
@@ -98,6 +99,38 @@
 	<button>
 	  ❤️
 	</button>
+	<script>
+	  const NDIGITS = 7
+
+	  const renderTechInfo = () => {
+		  const cssData = ['vh', 'dvh', 'svh', 'lvh']
+				.map(unit => {
+					const supports = window.CSS.supports('height', `100${unit}`)
+					const px = document.getElementById(unit).getBoundingClientRect().height
+
+					return `${unit}: ≈${px.toFixed(NDIGITS)}px,${supports ? '' : ' not'} supported`
+				})
+				.concat([`innerHeight/100: ${(window.innerHeight / 100).toFixed(NDIGITS)}px`])
+				.join('<br />')
+
+		  const ua = window.navigator.userAgent
+
+		  const date = new Date()
+		  const time = [
+			  date.getHours(),
+			  date.getMinutes(),
+			  date.getSeconds(),
+		  ].map(n => n.toString().padStart(2, '0')).join(':')
+		  const clock = `${time}.${date.getMilliseconds()}`
+
+		  document.querySelector('aside')
+			  .innerHTML = `<p>${clock}</p><p>${ua}</p><p>${cssData}</p>`
+
+		  requestAnimationFrame(renderTechInfo)
+	  }
+	  requestAnimationFrame(renderTechInfo)
+	</script>
+
 	<script type="module">
 	  import bridge from 'https://esm.run/@vkontakte/vk-bridge'
 
@@ -114,26 +147,6 @@
 		  catAvatar.setAttribute('src', `https://cataas.com/cat?time=${Date.now()}`)
 		  catAvatar.addEventListener('load', () => { likeBtn.disabled = false })
 	  })
-
-	  const renderTechInfo = () => {
-		  const cssData = ['vh', 'dvh', 'svh', 'lvh']
-				.map(unit => {
-					const supports = window.CSS.supports('height', `100${unit}`)
-					const px = document.getElementById(unit).getBoundingClientRect().height
-
-					return `${unit}: ≈${px.toFixed(2)}px,${supports ? '' : ' not'} supported`
-				})
-				.concat([`innerHeight/100: ${(window.innerHeight * 0.01).toFixed(2)}px`])
-				.join('<br />')
-
-		  const ua = window.navigator.userAgent
-
-		  document
-	  			.querySelector('aside')
-			  .innerHTML = `<p>${new Date()}</p><p>${ua}</p><p>${cssData}</p>`
-	  }
-	  renderTechInfo()
-	  setInterval(renderTechInfo, 500)
 	</script>
   </body>
 </html>
