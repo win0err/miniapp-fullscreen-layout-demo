@@ -113,38 +113,16 @@
 	  </button>
 	</div>
 	<script>
-	  const renderTechInfo = () => {
-		  const NDIGITS = 7
+	 document.querySelector('aside').innerHTML = `<p>${window.navigator.userAgent}</p>`
 
-		  const cssData = ['vh', 'dvh', 'svh', 'lvh']
-				.map(unit => {
-					const supports = window.CSS.supports('height', `100${unit}`)
-					const px = document.getElementById(unit).getBoundingClientRect().height
+	 const catAvatar = document.querySelector('img')
+	 const likeBtn = document.querySelector('button')
 
-					return `${unit}: ≈${px.toFixed(NDIGITS)}px,${supports ? '' : ' not'} supported`
-				})
-				.concat([
-					`innerHeight/100: ${(window.innerHeight / 100).toFixed(NDIGITS)}px`,
-					`clientHeight/100: ${(document.documentElement.clientHeight / 100).toFixed(NDIGITS)}px`,
-				])
-				.join('<br />')
-
-		  const ua = window.navigator.userAgent
-
-		  const date = new Date()
-		  const time = [
-			  date.getHours(),
-			  date.getMinutes(),
-			  date.getSeconds(),
-		  ].map(n => n.toString().padStart(2, '0')).join(':')
-		  const clock = `${time}.${date.getMilliseconds()}`
-
-		  document.querySelector('aside')
-			  .innerHTML = `<p>${clock}</p><p>${ua}</p><p>${cssData}</p>`
-
-		  requestAnimationFrame(renderTechInfo)
-	  }
-	  requestAnimationFrame(renderTechInfo)
+	 likeBtn.addEventListener('click', (e) => {
+	   likeBtn.disabled = true
+	   catAvatar.setAttribute('src', `https://cataas.com/cat?time=${Date.now()}`)
+	   catAvatar.addEventListener('load', () => { likeBtn.disabled = false })
+	 })
 	</script>
 
 	<script type="module">
@@ -152,16 +130,8 @@
 
 	  bridge.send('VKWebAppInit')
 
-	  const catAvatar = document.querySelector('img')
-	  catAvatar.addEventListener('click', () => {
+	  document.querySelector('img').addEventListener('click', () => {
 		  bridge.send('VKWebAppAllowNotifications').catch()
-	  })
-	  const likeBtn = document.querySelector('button')
-
-	  likeBtn.addEventListener('click', (e) => {
-		  likeBtn.disabled = true
-		  catAvatar.setAttribute('src', `https://cataas.com/cat?time=${Date.now()}`)
-		  catAvatar.addEventListener('load', () => { likeBtn.disabled = false })
 	  })
 	</script>
   </body>
